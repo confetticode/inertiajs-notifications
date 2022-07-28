@@ -1,0 +1,1 @@
+# Inertiajs Notifications
