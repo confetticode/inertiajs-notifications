@@ -1,1 +1,1 @@
-# Inertiajs Notifications
+# Laravel Inertiajs Notifications

@@ -10,7 +10,7 @@ class Action implements Arrayable
     protected string $type = 'primary';
     protected string $url;
 
-    public static function make()
+    public static function create()
     {
         return new static;
     }

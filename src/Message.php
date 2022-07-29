@@ -2,19 +2,43 @@
 
 namespace ConfettiCode\Inertiajs\Notifications;
 
+use Closure;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Request;
 
 class Message implements Arrayable
 {
-    protected Request $request;
+    use Concerns\HasDuration;
+
     protected string $title;
     protected string $type;
+    protected string $body;
     protected array $actions = [];
+
+    private Request $request;
+    private static ?Closure $resolver = null;
 
     public function __construct(Request $request)
     {
         $this->request = $request;
+    }
+
+    public static function factory(Closure $resolver)
+    {
+        static::$resolver = $resolver;
+    }
+
+    public static function create(): static
+    {
+        $instance = call_user_func(static::$resolver);
+
+        if (!$instance instanceof static) {
+            throw new \RuntimeException(
+                sprintf('The resolver must create a new instance of %s.', self::class)
+            );
+        }
+
+        return $instance;
     }
 
     public function success(): self
@@ -59,13 +83,13 @@ class Message implements Arrayable
         return $this;
     }
 
-
     public function toArray()
     {
         return [
             'title' => $this->title,
             'type' => $this->type,
             'body' => $this->body,
+            'duration' => $this->durationInSeconds * 1000 ?? null,
             'actions' => collect($this->actions)->toArray(),
         ];
     }
