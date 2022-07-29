@@ -12,4 +12,11 @@ class NotificationServiceProvider extends ServiceProvider
             return new Message($this->app['request']);
         });
     }
+
+    public function boot()
+    {
+        $this->publishes([
+            __DIR__ . '/../resources/js' => resource_path('js/Inertiajs/Notifications'),
+        ], 'inertiajs-notifications');
+    }
 }
