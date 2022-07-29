@@ -1,5 +1,5 @@
 {
-    "name": "confetticode/laravel-inertiajs-notifications",
+    "name": "confetticode/inertiajs-notifications",
     "description": "Pretty Notifications for Laravel Inertiajs",
     "type": "library",
     "require": {
@@ -15,7 +15,8 @@
     "authors": [
         {
             "name": "Quynh Xuan Nguyen",
-            "email": "seriquynh@gmail.com"
+            "email": "seriquynh@gmail.com",
+            "homepage": "https://seriquynh.com"
         }
     ],
     "minimum-stability": "dev",

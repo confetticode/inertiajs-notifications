@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class Message implements Arrayable
 {
+    use Concerns\HasTitle;
+    use Concerns\HasType;
     use Concerns\HasDuration;
 
-    protected string $title;
-    protected string $type;
     protected string $body;
     protected array $actions = [];
 
@@ -58,13 +58,6 @@ class Message implements Arrayable
     public function info(): self
     {
         $this->type = 'info';
-
-        return $this;
-    }
-
-    public function title(string $title): self
-    {
-        $this->title = $title;
 
         return $this;
     }

@@ -6,8 +6,9 @@ use Illuminate\Contracts\Support\Arrayable;
 
 class Action implements Arrayable
 {
-    protected string $title;
-    protected string $type = 'primary';
+    use Concerns\HasTitle;
+    use Concerns\HasType;
+
     protected string $url;
 
     public static function create()
@@ -22,13 +23,6 @@ class Action implements Arrayable
             'type' => $this->type,
             'url' => $this->url,
         ];
-    }
-
-    public function title(string $title): self
-    {
-        $this->title = $title;
-
-        return $this;
     }
 
     public function primary(): self
